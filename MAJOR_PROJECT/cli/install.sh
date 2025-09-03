@@ -13,7 +13,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-REPO_URL="https://github.com/your-org/velora-cli"
+REPO_URL="https://github.com/Aaryanb45/Velora-"
 BINARY_NAME="velora"
 INSTALL_DIR="/usr/local/bin"
 
@@ -115,6 +115,4 @@ echo -e "${YELLOW}🔧 Next steps:${NC}"
 echo "1. Set up configuration: velora config setup"
 echo "2. Create your first service: velora create my-service --type api"
 echo "3. View help: velora --help"
-echo ""
-echo -e "${BLUE}📚 Documentation: https://docs.velora.dev${NC}"
-echo -e "${BLUE}💬 Support: https://discord.gg/velora${NC}"
+echo " "

@@ -20,7 +20,7 @@ const program = new Command();
 
 
 // CLI Header
-console.log(chalk.blue.bold(`
+console.log(chalk.pink.bold(`
 ╔══════════════════════════════════════╗
 ║            🚀 VELORA CLI             ║
 ║   Cloud-Native Developer Platform    ║
