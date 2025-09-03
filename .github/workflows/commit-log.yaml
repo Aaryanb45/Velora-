@@ -1,0 +1,46 @@
+name: Show Commit Changes with Line Numbers
+
+on:
+  push:
+
+jobs:
+  show-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Show changes for each commit with line numbers
+        run: |
+          echo "📝 Commit(s) in this push: ${{ github.sha }}"
+          
+          for commit in $(jq -r '.commits[].id' <<< "${{ toJson(github.event.commits) }}"); do
+            echo "============================================"
+            echo "🔍 Commit: $commit"
+            echo "--------------------------------------------"
+            git log -1 --pretty=format:"%h %s" $commit
+            echo
+
+            # For each file changed in this commit
+            for file in $(git diff-tree --no-commit-id --name-only -r $commit); do
+              stats=$(git show --stat --oneline $commit | grep "$file")
+
+              # Extract all changed line numbers (new file side)
+              lines=$(git show --unified=0 $commit -- "$file" \
+                | grep '^@@' \
+                | sed -E 's/.*\+([0-9]+).*/\1/' \
+                | paste -sd ", " -)
+
+              if [ -n "$lines" ]; then
+                echo " $stats    on line(s): $lines"
+              else
+                echo " $stats"
+              fi
+            done
+
+            echo
+            git show --stat --oneline $commit | tail -n 1
+            echo "============================================"
+          done
