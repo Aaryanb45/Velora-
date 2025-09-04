@@ -2,6 +2,7 @@
 
 const { Command } = require('commander');
 const chalk = require('chalk');
+const packageJson = require('../package.json');
 
 // Import commands
 const createCommand = require('../src/commands/create');
@@ -12,19 +13,14 @@ const logsCommand = require('../src/commands/logs');
 const deleteCommand = require('../src/commands/delete');
 const configCommand = require('../src/commands/config');
 
-// Import package.json for version
-const packageJson = require('../package.json');
-
 const program = new Command();
-
-
 
 // CLI Header
 console.log(chalk.blue.bold(`
-╔══════════════════════════════════════╗
-║            🚀 VELORA CLI             ║
-║   Cloud-Native Developer Platform    ║
-╚══════════════════════════════════════╝
+    ╔══════════════════════════════════════╗
+   ║            🚀 VELORA CLI               ║
+  ║       Cloud-Native Developer Platform     ║
+ ╚══════════════════════════════════════════════╝
 `));
 
 program
@@ -51,14 +47,6 @@ Examples:
   $ velora logs my-api --follow                            Follow service logs
   $ velora deploy my-api --rollback                        Rollback service
 
-Documentation:
-  Visit https://docs.velora.dev for detailed documentation
-
-Support:
-  - Issues: https://github.com/velora/cli/issues
-  - Discord: https://discord.gg/velora
-  - Email: support@velora.dev
-`);
 
 // Global error handler
 process.on('unhandledRejection', (reason, promise) => {
