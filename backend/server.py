@@ -494,6 +494,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
